@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,10 +8,29 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject mainMenuPanel;
     [SerializeField] private Rigidbody2D rbShip;
-    [SerializeField]private Button _musicBtn;
-
+    [SerializeField]private Image _musicBtnImage;
+    [SerializeField]private Sprite _musicOnSpr,_musicOffSpr;
+    private AudioSource _bgMusic;
     public bool isStart;
-    float shipFallSpeed = 0;
+    float _shipFallSpeed = 0;
+
+    private void Start()
+    {
+        this._bgMusic = this.gameObject.GetComponent<AudioSource>();
+    }
+
+    private void Update()
+    {
+        if (isStart)
+        {
+            // Tinh diem cho player
+            // Tang gia tri de ship roi nhanh hon
+            _shipFallSpeed = Mathf.MoveTowards(_shipFallSpeed, Constant.MAXSPEED, 0.5f * Time.deltaTime);
+        }
+
+        rbShip.velocity = new Vector2(0, -_shipFallSpeed);
+    }
+    
     public void PlayGame()
     {
         mainMenuPanel.SetActive(false);
@@ -18,10 +38,21 @@ public class GameManager : MonoBehaviour
         isStart = true;
         
     }
-    private void ModifyMusicBtn()
+    public void ModifyMusicBtn()
     {
-       
+        if (_bgMusic.isPlaying)
+        {
+            _musicBtnImage.sprite = _musicOffSpr;
+            _bgMusic.Stop();
+        }
+        else
+        {
+            _musicBtnImage.sprite = _musicOnSpr;
+            _bgMusic.Play();
+        }
     }
+    
+    
     public IEnumerator  PauseGame(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -31,14 +62,4 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
     }
 
-    private void Update()
-    {
-        if (isStart)
-        {
-            // Tinh diem cho player
-            // Tang gia tri de ship roi nhanh hon
-            shipFallSpeed = Mathf.MoveTowards(shipFallSpeed, Constant.MAXSPEED, 0.5f * Time.deltaTime);
-        }
-        rbShip.velocity = new Vector2(0, -shipFallSpeed);
-    }
 }
