@@ -440,7 +440,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.023230582, y: 0.10453762}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -451,7 +451,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.71, y: 1.02}
+  m_Size: {x: 0.6403082, y: 0.81092477}
   m_EdgeRadius: 0
 --- !u!1 &247461604
 GameObject:
@@ -2111,6 +2111,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1359162072}
     m_Modifications:
+    - target: {fileID: 4216202973086395259, guid: dee7197030852954c9c42fd717a62dc1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.03
+      objectReference: {fileID: 0}
     - target: {fileID: 5066890050817317349, guid: dee7197030852954c9c42fd717a62dc1, type: 3}
       propertyPath: m_Name
       value: Mast (1)
